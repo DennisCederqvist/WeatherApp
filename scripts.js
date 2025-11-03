@@ -35,6 +35,10 @@ const result = document.getElementById("weatherResult");
 function showWeather(){
     const city = cityInput.value.trim().toLowerCase();
 
+    result.innerHTML = `
+        
+    `;
+
     const foundKey = Object.keys(MOCK_WEATHER).find((key) => key.toLowerCase() === city 
 );
 
