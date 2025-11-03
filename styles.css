@@ -53,6 +53,7 @@ button:hover {
     margin-top: 1.5rem;
     padding: 1rem;
     border-radius: 10px;
+    
 }
 
 .weathercard {
@@ -68,19 +69,20 @@ button:hover {
 
 /* = LOGO  = */
 header {
-  /* text-align: center; */
-   margin-top: 1rem;
-   margin-bottom: 1.5rem;
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .logo {
-  top: 15px;      
-  /* left: 50%; */
-  transform: translateX(-50%);
-  width: 80px;
-  height: 80px;
-  object-fit: contain;
-  animation: float 3s ease-in-out infinite;
+    position: absolute;
+    top: 15px;      
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    animation: float 3s ease-in-out infinite;
 }
 
 h1 {
