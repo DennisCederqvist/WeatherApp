@@ -10,6 +10,8 @@ html, body {
 
 body {
    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, 'sans-serif'; 
-  background: linear-gradient(to bottom, #327D96, #37C9FA, #ffffff);
-
+    background: linear-gradient(to bottom, #327D96, #37C9FA, #ffffff);
+    display: flex;
+    justify-content: center;
 }
+
