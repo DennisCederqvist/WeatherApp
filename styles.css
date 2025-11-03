@@ -13,7 +13,8 @@ body {
     background: linear-gradient(to bottom, #327D96, #37C9FA, #ffffff);
     display: flex;
     justify-content: center;
-
+    flex-direction: column;
+    align-items: center;
 }
 
 .container {
@@ -55,3 +56,23 @@ button:hover {
 }
  
 
+/* ===== LOGO AND HEADER ===== */
+header {
+  text-align: center;
+   margin-top: 1rem;
+   margin-bottom: 1.5rem;
+}
+
+.logo {
+  width: 80px;          /* Adjust size here */
+  height: 80px;
+  object-fit: contain;  /* Keeps the image from stretching */
+  margin-bottom: 0.5rem;
+  animation: float 3s ease-in-out infinite;
+}
+
+h1 {
+  font-size: 1.8rem;
+  color: #004b87;
+  margin: 0;
+}
