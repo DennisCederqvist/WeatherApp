@@ -72,16 +72,25 @@ card.classList.add("weathercard");
 card.setAttribute("data-city", foundKey);
 card.innerHTML = `
     <div class="weather">
+    <button class="close-btn" title="Stäng">✖</button>
         <h2>${foundKey}</h2>
         <p>${data.icon} ${data.description}</p>
         <p>${data.tempC}°C</p>
         <small>Uppdaterad: ${data.updated}</small> 
     </div>
   `;
-  result.prepend(card);
+result.prepend(card);
+
+const closeBtn = card.querySelector(".close-btn");
+
+closeBtn.addEventListener("click", () => {
+  card.style.opacity = "0";
+  setTimeout(() => card.remove(), 300);
+});
+
+
   result.classList.remove("hidden");
   cityInput.value = "";
-
 }
 
 searchBtn.addEventListener("click", showWeather);

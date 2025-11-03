@@ -62,6 +62,7 @@ button:hover {
     border-radius: 20px;
     height: fit-content;
     text-align: center;
+    position: relative;
 }
  
 
@@ -87,4 +88,16 @@ h1 {
   font-size: 1.8rem;
   color: #004b87;
   margin: 0;
+}
+
+.close-btn {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: black;
+  transition: color 0.2s ease;
 }
