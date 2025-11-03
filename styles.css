@@ -54,6 +54,10 @@ button:hover {
     padding: 1rem;
     border-radius: 10px;
 }
+
+.weathercard {
+    border: 2px red solid;
+}
  
 
 /* ===== LOGO AND HEADER ===== */
