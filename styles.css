@@ -1,0 +1,15 @@
+*, ::before, ::after  {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, 'sans-serif'; 
+  background: linear-gradient(to bottom, #327D96, #37C9FA, #ffffff);
+
+}
