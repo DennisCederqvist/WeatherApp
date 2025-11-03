@@ -7,25 +7,58 @@ MOCK_WEATHER = {
 };
 
 
+// const searchBtn = document.getElementById("searchBtn");
+// const cityInput = document.getElementById("cityInput");
+// const result = document.getElementById("weatherResult");
+
+// searchBtn.addEventListener("click", () => {
+// const city = cityInput.value.trim();
+// if (!MOCK_WEATHER[city]) {
+// result.innerHTML = "<p>Staden finns inte i systemet.</p>";
+// result.classList.remove("hidden");
+// return;
+// }
+// const data = MOCK_WEATHER[city];
+// result.innerHTML = `
+// <h2>${city}</h2>
+// <p>${data.icon} ${data.description}</p>
+// <p>${data.tempC}°C</p>
+// <small>Uppdaterad: ${data.updated}</small>
+// `;
+// result.classList.remove("hidden");
+// });
+
 
 const searchBtn = document.getElementById("searchBtn");
 const cityInput = document.getElementById("cityInput");
 const result = document.getElementById("weatherResult");
-searchBtn.addEventListener("click", () => {
-const city = cityInput.value.trim();
-if (!MOCK_WEATHER[city]) {
-result.innerHTML = "<p>Staden finns inte i systemet.</p>";
-result.classList.remove("hidden");
-return;
+
+function showWeather(){
+    const city = cityInput.value.trim().toLowerCase();
+
+    const foundKey = Object.keys(MOCK_WEATHER).find((key) => key.toLowerCase() === city 
+);
+
+if (!foundKey) {
+    result.innerHTML = "<p>Staden finns inte i systemet.</p>";
+    result.classList.remove("hidden");
 }
-const data = MOCK_WEATHER[city];
+
+const data = MOCK_WEATHER [foundKey];
 result.innerHTML = `
-<h2>${city}</h2>
-<p>${data.icon} ${data.description}</p>
-<p>${data.tempC}°C</p>
-<small>Uppdaterad: ${data.updated}</small>
-`;
-result.classList.remove("hidden");
+    <h2>${foundKey}</h2>
+    <p>${data.icon} ${data.description}</p>
+    <p>${data.tempC}°C</p>
+    <small>Uppdaterad: ${data.updated}</small>
+  `;
+  result.classList.remove("hidden");
+
+}
+
+searchBtn.addEventListener("click", showWeather);
+
+cityInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+        showWeather();
+    }
 });
-
-
