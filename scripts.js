@@ -36,7 +36,7 @@ function showWeather(){
     const city = cityInput.value.trim().toLowerCase();
 
     result.innerHTML = `
-        
+
     `;
 
     const foundKey = Object.keys(MOCK_WEATHER).find((key) => key.toLowerCase() === city 
@@ -48,13 +48,19 @@ if (!foundKey) {
 }
 
 const data = MOCK_WEATHER [foundKey];
-result.innerHTML = `
-    <h2>${foundKey}</h2>
-    <p>${data.icon} ${data.description}</p>
-    <p>${data.tempC}°C</p>
-    <small>Uppdaterad: ${data.updated}</small>
+const card = document.createElement("div");
+card.classList.add("weathercard");
+card.innerHTML = `
+    <div class="weather">
+        <h2>${foundKey}</h2>
+        <p>${data.icon} ${data.description}</p>
+        <p>${data.tempC}°C</p>
+        <small>Uppdaterad: ${data.updated}</small> 
+    </div>
   `;
+  result.appendChild(card);
   result.classList.remove("hidden");
+  cityInput.value = "";
 
 }
 
