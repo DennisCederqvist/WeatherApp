@@ -34,17 +34,13 @@ const result = document.getElementById("weatherResult");
 
 function showWeather(){
     const city = cityInput.value.trim().toLowerCase();
-
-    result.innerHTML = `
-
-    `;
-
     const foundKey = Object.keys(MOCK_WEATHER).find((key) => key.toLowerCase() === city 
 );
 
 if (!foundKey) {
     result.innerHTML = "<p>Staden finns inte i systemet.</p>";
     result.classList.remove("hidden");
+    return;
 }
 
 const data = MOCK_WEATHER [foundKey];

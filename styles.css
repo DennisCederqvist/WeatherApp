@@ -56,7 +56,12 @@ button:hover {
 }
 
 .weathercard {
-    border: 2px red solid;
+    color: #000000;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    padding: 2rem;
+    border-radius: 20px;
+    height: fit-content;
+    text-align: center;
 }
  
 
