@@ -63,7 +63,7 @@ const existingErr = document.getElementById("weatherError");
 
 const existingCard = result.querySelector(`[data-city="${foundKey}"]`);
   if (existingCard) {
-    existingCard.remove(); // Ta bort gamla kortet innan vi lägger till nytt
+    existingCard.remove();
   }
 
 const data = MOCK_WEATHER [foundKey];
