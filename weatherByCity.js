@@ -4,16 +4,35 @@ export async function getWeatherByCity(cityName) {
     const geoData = await geoCor.json();
 
       const swedishResult = geoData.results.find(r => r.country_code === "SE");
-      const { latitude, longitude } = swedishResult;
+          if (!swedishResult) {
+            console.warn(`Ingen svensk stad med namnet '${cityName}' hittades.`);
+            return null;
+          }
+      const { name, latitude, longitude } = swedishResult;
       console.log("Swedish Geocoding Result:", swedishResult);
 
       const weatherRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true&timezone=Europe/Stockholm`);
       const weatherData = await weatherRes.json();
+
+      if (!weatherData.current_weather) {
+        console.warn("Ingen väderdata hittades.");
+        return null;
+      }
+
+      const { temperature, windspeed, weathercode, time } = weatherData.current_weather;
+
       console.log("Current Weather Data:", weatherData);
-      return swedishResult;
+      return {
+      name,
+      temperature,
+      windspeed,
+      weathercode,
+      time,
+    };
   }
 
   catch (error) {
     console.error("Error fetching weather data:", error);
+    return null;
   }
 }

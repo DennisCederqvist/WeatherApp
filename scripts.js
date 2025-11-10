@@ -12,63 +12,54 @@ const searchBtn = document.getElementById("searchBtn");
 const cityInput = document.getElementById("cityInput");
 const result = document.getElementById("weatherResult");
 
-function showWeather(){
+async function showWeather(){
     const city = cityInput.value.trim().toLowerCase();
-    getWeatherByCity(city);
-    const foundKey = Object.keys(city).find((key) => key.toLowerCase() === city 
-);
-
-if (!foundKey) {
-    let err = document.getElementById("weatherError");
-    if (!err) {
-      err = document.createElement("p");
-      err.id = "weatherError";
-      err.className = "error";
-      result.prepend(err);
+    const data = await getWeatherByCity(city);
+      if (!data) {
+        let err = document.getElementById("weatherError");
+      if (!err) {
+        err = document.createElement("p");
+        err.id = "weatherError";
+        err.className = "error";
+        result.prepend(err);
     }
     err.textContent = "⚠️ Staden finns inte i systemet.";
-    err.style.color ="red";
+    err.style.color = "red";
     err.hidden = false;
     result.classList.remove("hidden");
     cityInput.value = "";
     return;
-  }
+    }
 
-const existingErr = document.getElementById("weatherError");
-    if (existingErr) existingErr.hidden = true;
+  const existingCard = result.querySelector(`[data-city="${city}"]`);
+    if (existingCard) {
+      existingCard.remove();
+    }
 
-const existingCard = result.querySelector(`[data-city="${foundKey}"]`);
-  if (existingCard) {
-    existingCard.remove();
-  }
-
-const data = MOCK_WEATHER [foundKey];
-const card = document.createElement("div");
-card.classList.add("weathercard");
-card.setAttribute("data-city", foundKey);
-card.innerHTML = `
+  const card = document.createElement("div");
+  card.classList.add("weathercard");
+  card.setAttribute("data-city", data.name);
+  card.innerHTML = `
     <div class="weather">
-    <button class="close-btn" title="Stäng">✖</button>
-        <h2>${foundKey}</h2>
-        <p>${data.icon} ${data.description}</p>
-        <p class="temp">${data.tempC}°C</p>
-        <small class="updated">Uppdaterad: ${data.updated} </small> 
+      <button class="close-btn" title="Stäng">✖</button>
+      <h2>${data.name}</h2>
+      <p>🌡️ ${data.temperature}°C</p>
+      <p>💨 ${data.windspeed} m/s</p>
+      <small>Uppdaterad: ${new Date(data.time).toLocaleTimeString("sv-SE")}</small>
     </div>
   `;
+  result.prepend(card);
 
-result.prepend(card);
+  const closeBtn = card.querySelector(".close-btn");
+  closeBtn.addEventListener("click", () => {
+    card.style.opacity = "0";
+    setTimeout(() => card.remove(), 300);
+  });
 
-const closeBtn = card.querySelector(".close-btn");
-
-closeBtn.addEventListener("click", () => {
-  card.style.opacity = "0";
-  setTimeout(() => card.remove(), 300);
-});
-
-
-  result.classList.remove("hidden");
-  cityInput.value = "";
+    result.classList.remove("hidden");
+    cityInput.value = "";
 }
+
 
 searchBtn.addEventListener("click", showWeather);
 
@@ -79,19 +70,20 @@ cityInput.addEventListener("keydown", (e) => {
 });
 
 
-function updateWeatherCards() {
-  const cards = document.querySelectorAll(".weathercard");
-  cards.forEach((card) => {
-    const city = card.getAttribute("data-city");
-    const data = MOCK_WEATHER[city];
-    if (!data) return;
 
-    card.querySelector("p:nth-of-type(1)").innerHTML = `${data.icon} ${data.description}`;
-    card.querySelector("p:nth-of-type(2)").textContent = `${data.tempC}°C`;
-    card.querySelector("small").textContent = `Uppdaterad: ${data.updated}`;
-  });
+async function updateWeatherCards() {
+  const cards = document.querySelectorAll(".weathercard");
+
+  for (const card of cards) {
+    const city = card.getAttribute("data-city");
+    const data = await getWeatherByCity(city);
+    if (!data) continue;
+
+    card.querySelector("p:nth-of-type(1)").textContent = `🌡️ ${data.temperature}°C`;
+    card.querySelector("p:nth-of-type(2)").textContent = `💨 ${data.windspeed} m/s`;
+    card.querySelector("small").textContent = `Uppdaterad: ${new Date(data.time).toLocaleTimeString("sv-SE")}`;
+  }
 }
 
+// Uppdatera var 10:e sekund
 setInterval(updateWeatherCards, 10000);
-
-
