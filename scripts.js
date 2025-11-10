@@ -1,4 +1,5 @@
 import { getWeatherByCity } from './weatherByCity.js';
+import { weatherCode } from './weatherCode.js';
 
 const searchBtn = document.getElementById("searchBtn");
 const cityInput = document.getElementById("cityInput");
@@ -41,7 +42,8 @@ async function showWeather(){
     <div class="weather">
       <button class="close-btn" title="Stäng">✖</button>
       <h2>${data.name}</h2>
-      <p>🌡️ ${data.temperature}°C</p>
+      <p> 🌡️ ${data.temperature}°C</p>
+      <p> ${weatherDesciption}</p>
       <p>💨 ${data.windspeed} m/s</p>
       <small>Uppdaterad: ${new Date(data.time).toLocaleTimeString("sv-SE")}</small>
     </div>
@@ -78,7 +80,8 @@ async function updateWeatherCards() {
     if (!data) continue;
 
     card.querySelector("p:nth-of-type(1)").textContent = `🌡️ ${data.temperature}°C`;
-    card.querySelector("p:nth-of-type(2)").textContent = `💨 ${data.windspeed} m/s`;
+    card.querySelector("p:nth-of-type(2)").textContent = `${weatherDesciption}`;
+    card.querySelector("p:nth-of-type(3)").textContent = `💨 ${data.windspeed} m/s`;
     card.querySelector("small").textContent = `Uppdaterad: ${new Date(data.time).toLocaleTimeString("sv-SE")}`;
   }
 }
