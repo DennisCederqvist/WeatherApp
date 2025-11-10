@@ -11,7 +11,7 @@ html, body {
 
 body {
    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, 'sans-serif'; 
-    background: linear-gradient(to bottom, #327D96, #37C9FA, #ffffff);
+    background: linear-gradient(45deg, #327D96, #37C9FA, #ffffff);
     background-attachment: fixed; 
     background-repeat: no-repeat;
     background-size: cover;

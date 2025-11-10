@@ -8,6 +8,7 @@ const result = document.getElementById("weatherResult");
 async function showWeather(){
     const city = cityInput.value.trim().toLowerCase();
     const data = await getWeatherByCity(city);
+    const desc = weatherCode(data.weathercode);
       if (!data) {
         let err = document.getElementById("weatherError");
       if (!err) {
@@ -43,7 +44,7 @@ async function showWeather(){
       <button class="close-btn" title="Stäng">✖</button>
       <h2>${data.name}</h2>
       <p> 🌡️ ${data.temperature}°C</p>
-      <p> ${weatherDesciption}</p>
+      <p> ${desc}</p>
       <p>💨 ${data.windspeed} m/s</p>
       <small>Uppdaterad: ${new Date(data.time).toLocaleTimeString("sv-SE")}</small>
     </div>
@@ -80,7 +81,7 @@ async function updateWeatherCards() {
     if (!data) continue;
 
     card.querySelector("p:nth-of-type(1)").textContent = `🌡️ ${data.temperature}°C`;
-    card.querySelector("p:nth-of-type(2)").textContent = `${weatherDesciption}`;
+    card.querySelector("p:nth-of-type(2)").textContent = `${desc}`;
     card.querySelector("p:nth-of-type(3)").textContent = `💨 ${data.windspeed} m/s`;
     card.querySelector("small").textContent = `Uppdaterad: ${new Date(data.time).toLocaleTimeString("sv-SE")}`;
   }

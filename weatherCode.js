@@ -1,25 +1,24 @@
-export async function weatherCode() {
-    let weatherDesciption = 0;
+export function weatherCode(weatherDescription) {
     let description;
 
-    if (weatherDesciption === 0) {
+    if (weatherDescription === 0) {
         description = "☀️ Klar himmel"; 
-    } else if (weatherDesciption >= 1 && weatherDesciption <= 3) {
+    } else if (weatherDescription >= 1 && weatherDescription <= 3) {
         description = "☁️ Molnig"; 
-    } else if (weatherDesciption === 45 || weatherDesciption === 48) {
+    } else if (weatherDescription === 45 || weatherDescription === 48) {
         description = "🌫️ Dimma"; 
-    } else if (weatherDesciption === 51 || weatherDesciption === 53 || weatherDesciption === 55) {
+    } else if (weatherDescription === 51 || weatherDescription === 53 || weatherDescription === 55) {
         description = "🌧️ Duggregn"; 
-    } else if (weatherDesciption === 61 || weatherDesciption === 63 ||weatherDesciption === 65) {
+    } else if (weatherDescription === 61 || weatherDescription === 63 ||weatherDescription === 65) {
         description = "🌧️ Regn"; 
-    } else if (weatherDesciption === 71 || weatherDesciption === 73 || weatherDesciption === 75) {
+    } else if (weatherDescription === 71 || weatherDescription === 73 || weatherDescription === 75) {
         description = "🌨️ Snö"; 
-    } else if (weatherDesciption === 95 || weatherDesciption === 96 || weatherDesciption === 99) {
+    } else if (weatherDescription === 95 || weatherDescription === 96 || weatherDescription === 99) {
         description = "🌩️ Blixt och dunder";
     } else {
         return null;
     }
 
-    return "weatherCode()"
+    return description;
 
 }
