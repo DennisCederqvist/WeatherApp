@@ -1,5 +1,6 @@
 import { getWeatherByCity } from './weatherByCity.js';
 import { weatherCode } from './weatherCode.js';
+import { saveData, showData } from './saveLocal.js';
 
 const searchBtn = document.getElementById("searchBtn");
 const cityInput = document.getElementById("cityInput");
@@ -64,6 +65,8 @@ async function showWeather(){
 
     result.classList.remove("hidden");
     cityInput.value = "";
+
+    saveData();
 }
 
 
@@ -74,8 +77,6 @@ cityInput.addEventListener("keydown", (e) => {
         showWeather();
     }
 });
-
-
 
 async function updateWeatherCards() {
   const cards = document.querySelectorAll(".weathercard");
@@ -92,5 +93,9 @@ async function updateWeatherCards() {
   }
 }
 
+
+//visar sparad data från lokal när sidan laddas
+window.addEventListener("DOMContentLoaded", showData);
 // Uppdateras var 5:e minut
 setInterval(updateWeatherCards, 300000);
+
