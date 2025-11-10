@@ -11,7 +11,7 @@ export async function getWeatherByCity(cityName) {
       const { name, latitude, longitude } = swedishResult;
       console.log("Swedish Geocoding Result:", swedishResult);
 
-      const weatherRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true&timezone=Europe/Stockholm`);
+      const weatherRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true&daily=temperature_2m_max,temperature_2m_min,precipitation_sum&timezone=Europe/Stockholm&forecast_days=7`);
       const weatherData = await weatherRes.json();
 
       if (!weatherData.current_weather) {
