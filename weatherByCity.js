@@ -1,3 +1,9 @@
+export class WeatherService {
+  async getWeatherByCity(city) {
+    return await getWeatherByCity(city); // använder din befintliga funktion
+  }
+}
+
 export async function getWeatherByCity(cityName) {
   try {
     const geoCor = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${cityName}&count=10&language=en&format=json`);
