@@ -10,6 +10,8 @@ export class WeatherCard {
     const card = document.createElement("div");
     card.classList.add("weathercard");
     card.setAttribute("data-city", this.data.name);
+    card.setAttribute("data-weathercode", this.data.weathercode);
+
 
     const region = document.createElement("div");
     region.classList.add("weather");

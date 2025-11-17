@@ -10,8 +10,8 @@ export function saveData() {
   const data = manager.cards.map(card => ({
     city: card.data.name,
     temperature: card.data.temperature,
-    description: card.data.description,
-    windspeed: card.data.windspeed
+    windspeed: card.data.windspeed,
+    weathercode: card.data.weathercode 
   }));
 
   localStorage.setItem("weatherCards", JSON.stringify(data));
@@ -27,9 +27,8 @@ export function showData() {
     manager.addCard({
       name: data.city,
       temperature: Number(data.temperature),
-      description: data.description,
       windspeed: Number(data.windspeed),
-      weathercode: null
+      weathercode: Number(data.weathercode) 
     });
   });
 }
