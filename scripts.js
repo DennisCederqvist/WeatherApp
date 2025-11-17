@@ -64,3 +64,9 @@ window.addEventListener("DOMContentLoaded", showData);
 
 // Uppdateras var 5:e minut
 setInterval(updateWeatherCards, 300000);
+
+const toggleBtn = document.getElementById("toggleLayoutBtn");
+
+toggleBtn.addEventListener("click", () => {
+    result.classList.toggle("row-layout");
+});
