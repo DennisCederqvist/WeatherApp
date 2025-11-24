@@ -165,7 +165,7 @@ h1 {
 #weatherResult.row-layout {
   flex-direction: row;
   flex-wrap: wrap;
-  /* gap: 1.5rem; */
+  gap: 1.5rem;
   justify-content: center;
   align-items: flex-start;
 }
