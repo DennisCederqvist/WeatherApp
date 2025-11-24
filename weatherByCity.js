@@ -17,7 +17,7 @@ export async function getWeatherByCity(cityName) {
       const { name, latitude, longitude } = swedishResult;
       console.log("Swedish Geocoding Result:", swedishResult);
 
-      const weatherRes = await fetch(`http://kontoret.onvo.se:10680/v1/current?lat=${latitude}&lon=${longitude}`);
+      const weatherRes = await fetch(`http://stockholm3.onvo.se:81/v1/current?lat=${latitude}&lon=${longitude}`);
 
       if (!weatherRes.ok) {
       console.warn("Väder-API svarade med fel.");
