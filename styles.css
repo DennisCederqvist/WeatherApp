@@ -12,7 +12,7 @@ html, body {
 body {
   position: relative;
    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, 'sans-serif'; 
-    background: url(./imgs/City.png) no-repeat bottom center,
+    background: url(./imgs/City.png),
                   linear-gradient(
                   to bottom,
                   #c7e6ff 0%,
@@ -20,8 +20,10 @@ body {
                   #7fc0ff 55%,
                   #5aa8ff 80%,
                   #3e8eff 100%);
-    background-size: 100% auto, cover;
-    background-attachment: scroll, fixed;
+    background-position: center top, center bottom;
+    background-attachment: fixed; 
+    background-repeat: no-repeat;
+    background-size: cover, cover;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -111,6 +113,7 @@ header {
     height: 80px;
     object-fit: contain;
     animation: float 3s ease-in-out infinite;
+    z-index: 1;
 }
 
 h1 {
