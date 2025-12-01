@@ -55,7 +55,7 @@ export async function searchCities(query) {
 
 export async function getWeatherByLocation(location) {
   try {
-    const { name, latitude, longitude, country, country_code } = location;
+    const { name, latitude, longitude, country, country_code, admin1 } = location;
 
     const weatherRes = await fetch(
       `http://stockholm3.onvo.se:81/v1/current?lat=${latitude}&lon=${longitude}`
@@ -80,6 +80,7 @@ export async function getWeatherByLocation(location) {
       name,
       country,
       country_code,
+      admin1,
       latitude,
       longitude,
       temperature: weatherData.current.temperature,
@@ -125,7 +126,7 @@ export async function getWeatherByCity(cityName) {
       return null;
     }
 
-    const { name, latitude, longitude, country, country_code } = result;
+    const { name, latitude, longitude, country, country_code, admin1 } = result;
     console.log("Geocoding Result:", result);
 
     const weatherRes = await fetch(`http://stockholm3.onvo.se:81/v1/current?lat=${latitude}&lon=${longitude}`);
@@ -149,6 +150,7 @@ export async function getWeatherByCity(cityName) {
     name,
     country,
     country_code,
+    admin1,
     latitude,
     longitude,
     temperature: weatherData.current.temperature,
