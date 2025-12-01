@@ -13,6 +13,10 @@ export class WeatherService {
     return await getWeatherByCity(cityName);
   }
 
+  async getWeatherByLocation(location) {
+  return await getWeatherByLocation(location);
+  }
+
 }
 
 export async function searchCities(query) {
@@ -46,6 +50,55 @@ export async function searchCities(query) {
   }
 
 }
+
+// weather by loction
+
+export async function getWeatherByLocation(location) {
+  try {
+    const { name, latitude, longitude, country, country_code } = location;
+
+    const weatherRes = await fetch(
+      `http://stockholm3.onvo.se:81/v1/current?lat=${latitude}&lon=${longitude}`
+    );
+
+    if (!weatherRes.ok) {
+      console.warn("Väder-API svarade med fel.");
+      return null;
+    }
+
+    const weatherData = await weatherRes.json();
+
+    if (!weatherData.current) {
+      console.warn("Ingen väderdata hittades.");
+      return null;
+    }
+
+    let rawWind = weatherData.current.windspeed / 3.6;
+    rawWind = Number(rawWind.toFixed(1));
+
+    const weather = {
+      name,
+      country,
+      country_code,
+      latitude,
+      longitude,
+      temperature: weatherData.current.temperature,
+      windspeed: rawWind,
+      wind_dir: weatherData.current.wind_direction_name,
+      weathercode: weatherData.current.weather_code,
+      updated_at: weatherData.current.time,
+      is_day: weatherData.current.is_day,
+    };
+
+    console.log("Current Weather Data (by location):", weather);
+    return weather;
+  } catch (error) {
+    console.error("Error fetching weather data by location:", error);
+    return null;
+  }
+}
+
+// Weather by city
 
 export async function getWeatherByCity(cityName) {
   try {

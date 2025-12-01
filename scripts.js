@@ -12,6 +12,7 @@ const manager = new WeatherCardManager(result);
 setManager(manager);
 
 const service = new WeatherService();
+let selectedCity = null;
 
 searchBtn.addEventListener("click", showWeather);
 
@@ -23,19 +24,42 @@ cityInput.addEventListener("keydown", (e) => {
 
 cityInput.addEventListener("input", handleCityInput);
 
+// async function showWeather() {
+//     const city = cityInput.value.trim().toLowerCase();
+//     const data = await service.getWeatherByCity(city);
+
+//     if (!data) {
+//         showError("⚠️ Staden finns inte i systemet");
+//         return;
+//     }
+
+//     manager.addCard(data);
+//     saveData();  
+
+//     cityInput.value = "";
+// }
+
 async function showWeather() {
-    const city = cityInput.value.trim().toLowerCase();
-    const data = await service.getWeatherByCity(city);
+  const inputValue = cityInput.value.trim();
+  if (!inputValue) return;
 
-    if (!data) {
-        showError("⚠️ Staden finns inte i systemet");
-        return;
-    }
+  let weather;
 
-    manager.addCard(data);
-    saveData();  
+  if (selectedCity) {
+    weather = await service.getWeatherByLocation(selectedCity);
+  } else {
+    weather = await service.getWeatherByCity(inputValue);
+  }
 
-    cityInput.value = "";
+  if (!weather) {
+    showError("Staden hittades inte.");
+    return;
+  }
+
+  manager.addCard(weather);
+  saveData();
+
+  selectedCity = null;
 }
 
 async function updateWeatherCards() {
@@ -67,6 +91,8 @@ function showError(msg) {
 async function handleCityInput(e) {
     const query = e.target.value.trim();
 
+    selectedCity = null;
+
     if (query.length < 2) {
         clearCityDropdown();
         return;
@@ -82,26 +108,46 @@ function clearCityDropdown() {
 }
 
 function renderCityDropdown(cities) {
-    clearCityDropdown();
+  clearCityDropdown();
 
-    if (!cities || cities.length === 0) {
-        return;
+  if (!cities || cities.length === 0) {
+    return;
+  }
+
+  cities.forEach(city => {
+    const li = document.createElement("li");
+
+    const label = city.admin1
+      ? `${city.name}, ${city.admin1}, ${city.country} (${city.country_code})`
+      : `${city.name}, ${city.country} (${city.country_code})`;
+
+    li.textContent = label;
+
+li.addEventListener("click", async () => {
+  cityInput.value = label;
+  clearCityDropdown();
+
+  try {
+    // Hämta väder direkt för den här exakta platsen
+    const weather = await service.getWeatherByLocation
+      ? await service.getWeatherByLocation(city)  // om du har lagt till den metoden
+      : await service.getWeatherByCity(city.name); // fallback om du INTE gjort det än
+
+    if (!weather) {
+      showError("Staden hittades inte.");
+      return;
     }
 
-    cities.forEach (city => {
-        const li = document.createElement("li");
-        li.textContent = `${city.name}, ${city.country} (${city.country_code})`;
+    manager.addCard(weather);
+    saveData();
+  } catch (err) {
+    console.error(err);
+    showError("Något gick fel när vädret skulle hämtas.");
+  }
+});
 
-        li.addEventListener("click", () => {
-            cityInput.value = city.name;
-
-            clearCityDropdown();
-
-            showWeather();
-        });
-        
-        cityDropdown.appendChild(li);
-    });
+    cityDropdown.appendChild(li);
+  });
 }
 
 window.addEventListener("DOMContentLoaded", showData);
