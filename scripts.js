@@ -1,3 +1,7 @@
+// samma stad i olika länder kan ej visas samtidigt.
+// flytta admin1 och countrykod till ny rad med mindre font
+
+
 import { saveData, showData, setManager } from './saveLocal.js';
 import { WeatherService } from "./weatherByCity.js";
 import { WeatherCardManager } from "./weatherCardManager.js";
