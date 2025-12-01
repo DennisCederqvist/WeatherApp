@@ -31,14 +31,17 @@ export async function getWeatherByCity(cityName) {
         return null;
       }
 
+      let rawWind = weatherData.current.windspeed / 3.6;
+      rawWind = Number(rawWind.toFixed(1));
+
       const weather = {
       name,
-      temperature: weatherData.current.temperature_c,
-      windspeed: weatherData.current.wind_mps,
-      wind_deg: weatherData.current.wind_deg,
-      elevation: weatherData.current.elevation_m,
+      temperature: weatherData.current.temperature,
+      windspeed: rawWind,
+      wind_dir: weatherData.current.wind_direction_name,
       weathercode: weatherData.current.weather_code,
-      updated_at: weatherData.updated_at,
+      updated_at: weatherData.current.time,
+      is_day: weatherData.current.is_day,
     };
 
     console.log("Current Weather Data:", weather);
