@@ -180,3 +180,37 @@ h1 {
     display: none;
   }
 }
+
+
+
+
+/* styling för listan, kan behöva fixas */
+
+.city-dropdown {
+  margin-top: 0.5rem;
+  list-style: none;
+  padding: 0;
+  max-height: 200px;
+  overflow-y: auto;
+
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+.city-dropdown li {
+  padding: 0.4rem 0.6rem;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.city-dropdown li:last-child {
+  border-bottom: none;
+}
+
+.city-dropdown li:hover {
+  background-color: rgba(0, 75, 135, 0.1);
+}

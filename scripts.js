@@ -5,6 +5,8 @@ import { WeatherCardManager } from "./weatherCardManager.js";
 const result = document.getElementById("weatherResult");
 const searchBtn = document.getElementById("searchBtn");
 const cityInput = document.getElementById("cityInput");
+const cityDropdown = document.getElementById("cityDropdown");
+
 
 const manager = new WeatherCardManager(result);
 setManager(manager);
@@ -18,6 +20,8 @@ cityInput.addEventListener("keydown", (e) => {
         showWeather();
     }
 });
+
+cityInput.addEventListener("input", handleCityInput);
 
 async function showWeather() {
     const city = cityInput.value.trim().toLowerCase();
@@ -60,9 +64,48 @@ function showError(msg) {
     }, 3000);
 }
 
+async function handleCityInput(e) {
+    const query = e.target.value.trim();
+
+    if (query.length < 2) {
+        clearCityDropdown();
+        return;
+    }
+
+    const cities = await service.searchCities(query);
+    renderCityDropdown(cities);
+}
+
+function clearCityDropdown() {
+    if (!cityDropdown) return;
+    cityDropdown.innerHTML = "";
+}
+
+function renderCityDropdown(cities) {
+    clearCityDropdown();
+
+    if (!cities || cities.length === 0) {
+        return;
+    }
+
+    cities.forEach (city => {
+        const li = document.createElement("li");
+        li.textContent = `${city.name}, ${city.country} (${city.country_code})`;
+
+        li.addEventListener("click", () => {
+            cityInput.value = city.name;
+
+            clearCityDropdown();
+
+            showWeather();
+        });
+        
+        cityDropdown.appendChild(li);
+    });
+}
+
 window.addEventListener("DOMContentLoaded", showData);
 
-// Uppdateras var 5:e minut
 setInterval(updateWeatherCards, 300000);
 
 const toggleBtn = document.getElementById("toggleLayoutBtn");
