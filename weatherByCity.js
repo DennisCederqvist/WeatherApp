@@ -1,9 +1,3 @@
-// export class WeatherService {
-//   async getWeatherByCity(city) {
-//     return await getWeatherByCity(city); // använder din befintliga funktion
-//   }
-// }
-
 export class WeatherService {
   async searchCities(query) {
     return await searchCities(query);
@@ -39,7 +33,7 @@ export async function searchCities(query) {
       name: r.name,
       country: r.country,
       country_code: r.country_code,
-      admin1: r.admin1,
+      admin1: r.admin1 ?? "",
       latitude: r.latitude,
       longitude: r.longitude,
     }));
@@ -129,7 +123,7 @@ export async function getWeatherByCity(cityName) {
     const { name, latitude, longitude, country, country_code, admin1 } = result;
     console.log("Geocoding Result:", result);
 
-    const weatherRes = await fetch(`http://stockholm3.onvo.se:81/v1/current?lat=${latitude}&lon=${longitude}`);
+    const weatherRes = await fetch(`http://stockholm3.onvo.se:/v1/current?lat=${latitude}&lon=${longitude}`);
 
     if (!weatherRes.ok) {
     console.warn("Väder-API svarade med fel.");

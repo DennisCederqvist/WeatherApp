@@ -13,7 +13,9 @@ export function saveData() {
     country: card.data.country,
     temperature: card.data.temperature,
     windspeed: card.data.windspeed,
-    weathercode: card.data.weathercode 
+    weathercode: card.data.weathercode, 
+    longitude: card.data.longitude,
+    latitude: card.data.latitude
   }));
 
   localStorage.setItem("weatherCards", JSON.stringify(data));
@@ -32,7 +34,9 @@ export function showData() {
       country: data.country,
       temperature: Number(data.temperature),
       windspeed: Number(data.windspeed),
-      weathercode: Number(data.weathercode) 
+      weathercode: Number(data.weathercode), 
+      longitude: data.longitude,
+      latitude: data.latitude
     });
   });
 }

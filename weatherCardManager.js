@@ -10,7 +10,7 @@ export class WeatherCardManager {
   }
 
   addCard(data) {
-    const existing = this.cards.find(c => c.data.name === data.name);
+    const existing = this.cards.find(c => c.data.latitude === data.latitude && c.data.longitude === data.longitude);
     if (existing) {
       existing.element.remove();
       this.cards = this.cards.filter(c => c !== existing);
