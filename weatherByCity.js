@@ -58,7 +58,7 @@ export async function getWeatherByLocation(location) {
     const { name, latitude, longitude, country, country_code, admin1 } = location;
 
     const weatherRes = await fetch(
-      `http://stockholm3.onvo.se:81/v1/current?lat=${latitude}&lon=${longitude}`
+      `http://stockholm3.onvo.se:/v1/current?lat=${latitude}&lon=${longitude}`
     );
 
     if (!weatherRes.ok) {
