@@ -27,9 +27,10 @@ export class WeatherCard {
     region.setAttribute("aria-describedby", `desc-${this.data.name}`);
 
     region.innerHTML = `
-    <h2 id="title-${this.data.name}-${this.data.admin1}" aria-hidden="true">
-        ${this.data.name}, ${this.data.admin1}
+    <h2 id="title-${this.data.name}" aria-hidden="true">
+        ${this.data.name} 
     </h2>
+        <h4>${this.data.admin1}</h4>
         <p aria-hidden="true">🌡️ ${this.data.temperature}°C</p>
         <p aria-hidden="true">${weather.description}</p>
         <p aria-hidden="true">💨 ${this.data.windspeed} m/s</p>

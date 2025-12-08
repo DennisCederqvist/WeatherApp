@@ -229,3 +229,11 @@ const toggleBtn = document.getElementById("toggleLayoutBtn");
 toggleBtn.addEventListener("click", () => {
     result.classList.toggle("row-layout");
 });
+
+window.addEventListener("resize", () => {
+  const result = document.getElementById("weatherResult");
+
+  if (window.innerWidth <= 768) {
+    result.classList.remove("row-layout");
+  }
+});
