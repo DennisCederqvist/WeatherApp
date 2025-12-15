@@ -1,4 +1,4 @@
-# KnutsAnglarAPIProject
+# WeatherApp by KnutsÄnglar (Malmö 3 ChasAcademy)
 Chas Project, practising API handling.
 
 # 🌦️ Väderapp
