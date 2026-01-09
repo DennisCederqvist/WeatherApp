@@ -6,7 +6,7 @@ export function weatherCode(weatherDescription) {
         description = "☀️ Klar himmel"; 
         background = "./imgs/sun.jpg";
     } else if (weatherDescription >= 1 && weatherDescription <= 3) {
-        description = "☁️ Molnig"; 
+        description = "☁️ Molnigt"; 
         background = "./imgs/cloud.jpg";
     } else if (weatherDescription === 45 || weatherDescription === 48) {
         description = "🌫️ Dimma"; 
