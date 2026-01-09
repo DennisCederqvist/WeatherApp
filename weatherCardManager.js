@@ -37,7 +37,7 @@ export class WeatherCardManager {
 
   async updateAll() {
     for (const card of this.cards) {
-      const newData = await this.service.getWeatherByCity(card.data.name);
+      const newData = await this.service.getWeatherByLocation(card.data);
       if (newData) card.update(newData);
     }
     saveData();

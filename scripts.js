@@ -1,6 +1,3 @@
-// samma stad i olika länder kan ej visas samtidigt.
-// flytta admin1 och countrykod till ny rad med mindre font
-
 
 import { saveData, showData, setManager } from './saveLocal.js';
 import { WeatherService } from "./weatherByCity.js";
@@ -38,20 +35,6 @@ cityInput.addEventListener("keydown", async (e) => {
 
 cityInput.addEventListener("input", handleCityInput);
 
-// async function showWeather() {
-//     const city = cityInput.value.trim().toLowerCase();
-//     const data = await service.getWeatherByCity(city);
-
-//     if (!data) {
-//         showError("⚠️ Staden finns inte i systemet");
-//         return;
-//     }
-
-//     manager.addCard(data);
-//     saveData();  
-
-//     cityInput.value = "";
-// }
 
 async function showWeather() {
     const inputValue = cityInput.value.trim();

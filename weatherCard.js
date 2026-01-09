@@ -27,22 +27,46 @@ export class WeatherCard {
     region.setAttribute("aria-describedby", `desc-${this.data.name}`);
 
 
-    // aria-hidden="true"
+    // Rensa tidigare innehåll
+    region.replaceChildren();
 
-    region.innerHTML = `
-    <h2 id="title-${this.data.name}" >
-        ${this.data.name} 
-    </h2>
-        <h3>${this.data.admin1}</h4>
-        <p aria-hidden="true">🌡️ ${this.data.temperature}°C</p>
-        <p aria-hidden="true">${weather.description}</p>
-        <p aria-hidden="true">💨 ${this.data.windspeed} m/s</p>
+    const safeKey = String(this.data.name ?? "")
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9_-]+/g, "-");
 
-        <span id="desc-${this.data.name}" class="sr-only">
-            ${this.data.temperature} grader, ${weather.description}, 
-            vind ${this.data.windspeed} meter per sekund.
-        </span>
-    `;
+        const h2 = document.createElement("h2");
+        h2.id = `title-${safeKey}`;
+        h2.textContent = this.data.name ?? "";
+        region.appendChild(h2);
+
+        if (this.data.admin1) {
+        const h3 = document.createElement("h3");
+        h3.textContent = this.data.admin1;
+        region.appendChild(h3);
+        }
+
+        const pTemp = document.createElement("p");
+        pTemp.setAttribute("aria-hidden", "true");
+        pTemp.textContent = `🌡️ ${this.data.temperature}°C`;
+        region.appendChild(pTemp);
+
+        const pDesc = document.createElement("p");
+        pDesc.setAttribute("aria-hidden", "true");
+        pDesc.textContent = weather.description ?? "";
+        region.appendChild(pDesc);
+
+        const pWind = document.createElement("p");
+        pWind.setAttribute("aria-hidden", "true");
+        pWind.textContent = `💨 ${this.data.windspeed} m/s`;
+        region.appendChild(pWind);
+
+        const sr = document.createElement("span");
+        sr.id = `desc-${safeKey}`;
+        sr.className = "sr-only";
+        sr.textContent = `${this.data.temperature} grader, ${weather.description ?? ""}, vind ${this.data.windspeed} meter per sekund.`;
+        region.appendChild(sr);
+
 
     const closeBtn = document.createElement("button");
     closeBtn.classList.add("close-btn");
